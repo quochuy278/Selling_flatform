@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const errorController = require('./controllers/error');
+const mongoose = require('mongoose');
 
 const app = express();
 
@@ -21,4 +22,7 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-app.listen(3000);
+mongoose.connect('mongodb+srv://HuyBui:FdQJp4MtHYefN9E@cluster0.dgjac.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+.then(result => {
+    app.listen(3000);
+})
