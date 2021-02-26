@@ -4,28 +4,25 @@ const Schema = mongoose.Schema;
 const productSchema = new Schema({
   title: {
     type: String , 
-    require: true
+    required: true
   },
   price: {
     type: Number,
-    require: true
+    required: true
   },
   description:{
     type: String,
-    require: true
+    required: true
   },
   imageUrl: {
     type: String,
-    require: true
+    required: true
   },
-  time: {
-    type: Date,
-    require: true
-  },
+ 
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    require: true
+    required: true
   }
 })
 
