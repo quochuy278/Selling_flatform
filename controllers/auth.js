@@ -1,3 +1,4 @@
+
 const crypto = require('crypto');
 
 const bcrypt = require('bcryptjs');
@@ -268,3 +269,4 @@ exports.postNewPassword = (req, res, next) => {
       console.log(err);
     });
 };
+

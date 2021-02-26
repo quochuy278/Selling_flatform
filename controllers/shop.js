@@ -1,14 +1,18 @@
 const Product = require('../models/product');
+
 const Order = require('../models/order');
+
 
 exports.getProducts = (req, res, next) => {
   Product.find()
     .then(products => {
+
       console.log(products);
       res.render('shop/product-list', {
         prods: products,
         pageTitle: 'All Products',
         path: '/products'
+
       });
     })
     .catch(err => {
@@ -23,11 +27,13 @@ exports.getProduct = (req, res, next) => {
       res.render('shop/product-detail', {
         product: product,
         pageTitle: product.title,
+
         path: '/products'
       });
     })
     .catch(err => console.log(err));
 };
+
 
 exports.getIndex = (req, res, next) => {
   Product.find()
@@ -56,6 +62,7 @@ exports.getCart = (req, res, next) => {
       });
     })
     .catch(err => console.log(err));
+
 };
 
 exports.postCart = (req, res, next) => {
@@ -68,6 +75,7 @@ exports.postCart = (req, res, next) => {
       console.log(result);
       res.redirect('/cart');
     });
+
 };
 
 exports.postCartDeleteProduct = (req, res, next) => {
@@ -79,7 +87,6 @@ exports.postCartDeleteProduct = (req, res, next) => {
     })
     .catch(err => console.log(err));
 };
-
 exports.postOrder = (req, res, next) => {
   req.user
     .populate('cart.items.productId')
@@ -104,8 +111,7 @@ exports.postOrder = (req, res, next) => {
       res.redirect('/orders');
     })
     .catch(err => console.log(err));
-};
-
+};                                                                                                                       
 exports.getOrders = (req, res, next) => {
   Order.find({ 'user.userId': req.user._id })
     .then(orders => {
@@ -116,4 +122,7 @@ exports.getOrders = (req, res, next) => {
       });
     })
     .catch(err => console.log(err));
+
 };
+
+

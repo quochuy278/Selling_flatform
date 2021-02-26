@@ -15,8 +15,10 @@ main {
   margin: auto;
 }
 
+
 form {
   display: inline;
+
 }
 
 .centered {
@@ -30,6 +32,7 @@ form {
 .image img {
   height: 100%;
 }
+
 
 .main-header {
   width: 100%;
@@ -54,6 +57,8 @@ form {
   padding: 0;
   display: flex;
 }
+
+
 
 .main-header__item {
   margin: 0 1rem;

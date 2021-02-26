@@ -10,6 +10,7 @@ exports.getAddProduct = (req, res, next) => {
     hasError: false,
     errorMessage: null,
     validationErrors: []
+
   });
 };
 
@@ -38,18 +39,18 @@ exports.postAddProduct = (req, res, next) => {
     });
   }
 
-  const product = new Product({
-    title: title,
-    price: price,
-    description: description,
+
+
     imageUrl: imageUrl,
     userId: req.user
   });
+
   product
     .save()
     .then(result => {
       // console.log(result);
       console.log('Created Product');
+      console.log(req.body)
       res.redirect('/admin/products');
     })
     .catch(err => {
@@ -105,6 +106,7 @@ exports.postEditProduct = (req, res, next) => {
       },
       errorMessage: errors.array()[0].msg,
       validationErrors: errors.array()
+
     });
   }
 
@@ -149,3 +151,4 @@ exports.postDeleteProduct = (req, res, next) => {
     })
     .catch(err => console.log(err));
 };
+
