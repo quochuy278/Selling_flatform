@@ -49,13 +49,13 @@ img {
   display: flex;
 }
 
+
+
 .main-header__item {
   margin: 0 1rem;
   padding: 0;
 }
-#loginbutton{
-  text-decoration: none;
-}
+
 .main-header__item a {
   text-decoration: none;
   color: white;
