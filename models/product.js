@@ -21,6 +21,11 @@ const productSchema = new Schema({
   time: {
     type: Date,
     require: true
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    require: true
   }
 })
 
