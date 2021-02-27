@@ -1,0 +1,770 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Sample Implicit Flow OAuth2 Project</title>
+    <style type="text/css">
+      body {
+      	font-family: Trebuchet MS, sans-serif;
+      	font-size: 15px;
+      	color: #444;
+      	margin-right: 24px;
+      }
+      
+      h1	{
+      	font-size: 25px;
+      }
+      h2	{
+      	font-size: 20px;
+      }
+      h3	{
+      	font-size: 16px;
+      	font-weight: bold;
+      }
+      hr	{
+      	height: 1px;
+      	border: 0;
+      	color: #ddd;
+      	background-color: #ddd;
+      }
+      
+      .app-desc {
+        clear: both;
+        margin-left: 20px;
+      }
+      .param-name {
+        width: 100%;
+      }
+      .license-info {
+        margin-left: 20px;
+      }
+      
+      .license-url {
+        margin-left: 20px;
+      }
+      
+      .model {
+        margin: 0 0 0px 20px;
+      }
+      
+      .method {
+        margin-left: 20px;
+      }
+      
+      .method-notes	{
+      	margin: 10px 0 20px 0;
+      	font-size: 90%;
+      	color: #555;
+      }
+      
+      pre {
+        padding: 10px;
+        margin-bottom: 2px;
+      }
+      
+      .http-method {
+       text-transform: uppercase;
+      }
+      
+      pre.get {
+        background-color: #0f6ab4;
+      }
+      
+      pre.post {
+        background-color: #10a54a;
+      }
+      
+      pre.put {
+        background-color: #c5862b;
+      }
+      
+      pre.delete {
+        background-color: #a41e22;
+      }
+      
+      .huge	{
+      	color: #fff;
+      }
+      
+      pre.example {
+        background-color: #f3f3f3;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      
+      code {
+        white-space: pre;
+      }
+      
+      .nickname {
+        font-weight: bold;
+      }
+      
+      .method-path {
+        font-size: 1.5em;
+        background-color: #0f6ab4;
+      }
+      
+      .up {
+        float:right;
+      }
+      
+      .parameter {
+        width: 500px;
+      }
+      
+      .param {
+        width: 500px;
+        padding: 10px 0 0 20px;
+        font-weight: bold;
+      }
+      
+      .param-desc {
+        width: 700px;
+        padding: 0 0 0 20px;
+        color: #777;
+      }
+      
+      .param-type {
+        font-style: italic;
+      }
+      
+      .param-enum-header {
+      width: 700px;
+      padding: 0 0 0 60px;
+      color: #777;
+      font-weight: bold;
+      }
+      
+      .param-enum {
+      width: 700px;
+      padding: 0 0 0 80px;
+      color: #777;
+      font-style: italic;
+      }
+      
+      .field-label {
+        padding: 0;
+        margin: 0;
+        clear: both;
+      }
+      
+      .field-items	{
+      	padding: 0 0 15px 0;
+      	margin-bottom: 15px;
+      }
+      
+      .return-type {
+        clear: both;
+        padding-bottom: 10px;
+      }
+      
+      .param-header {
+        font-weight: bold;
+      }
+      
+      .method-tags {
+        text-align: right;
+      }
+      
+      .method-tag {
+        background: none repeat scroll 0% 0% #24A600;
+        border-radius: 3px;
+        padding: 2px 10px;
+        margin: 2px;
+        color: #FFF;
+        display: inline-block;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>Sample Implicit Flow OAuth2 Project</h1>
+    <div class="app-desc">This is an example of using OAuth2 Implicit Flow in a specification to describe security to your API.</div>
+    <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a href="hello@helloreverb.com">hello@helloreverb.com</a></div>
+    <div class="app-desc">Version: 1.0.0</div>
+    
+    <div class="license-info">All rights reserved</div>
+    <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+    <ol>
+      <li>HTTP Basic Authentication</li>
+    </ol>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Default">Default</a></h4>
+  <ul>
+  <li><a href="#getAdminAddProduct"><code><span class="http-method">get</span> /admin/add-product</code></a></li>
+  <li><a href="#getAdminEditProduct"><code><span class="http-method">get</span> /admin/edit-product/{productId}</code></a></li>
+  <li><a href="#getAdminProducts"><code><span class="http-method">get</span> /admin/products</code></a></li>
+  <li><a href="#getLogout"><code><span class="http-method">get</span> /logout</code></a></li>
+  <li><a href="#getShop"><code><span class="http-method">get</span> /shop</code></a></li>
+  <li><a href="#getShopItemId"><code><span class="http-method">get</span> /shop/products</code></a></li>
+  <li><a href="#getShopItemIdModified?"><code><span class="http-method">get</span> /shop/products/{productId}</code></a></li>
+  <li><a href="#getShopSignup"><code><span class="http-method">get</span> /signup</code></a></li>
+  <li><a href="#getShopUserIdAddItem"><code><span class="http-method">get</span> /shop/cart</code></a></li>
+  <li><a href="#postAdminAddProduct"><code><span class="http-method">post</span> /admin/add-product</code></a></li>
+  <li><a href="#postAdminDeleteProduct"><code><span class="http-method">post</span> /admin/delete-product</code></a></li>
+  <li><a href="#postAdminEditProduct"><code><span class="http-method">post</span> /admin/edit-product/{productId}</code></a></li>
+  <li><a href="#postShopCart"><code><span class="http-method">post</span> /shop/cart</code></a></li>
+  <li><a href="#postShopCartDeleteItem"><code><span class="http-method">post</span> /shop/cart-delete-item</code></a></li>
+  <li><a href="#postShopCreateOrder"><code><span class="http-method">post</span> /shop/create-order</code></a></li>
+  <li><a href="#postSignup"><code><span class="http-method">post</span> /signup</code></a></li>
+  </ul>
+
+  <h1><a name="Default">Default</a></h1>
+  <div class="method"><a name="getAdminAddProduct"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /admin/add-product</code></pre></div>
+    <div class="method-summary">Your GET endpoint (<span class="nickname">getAdminAddProduct</span>)</div>
+    <div class="method-notes">search for the added product</div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    get successfully
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAdminEditProduct"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /admin/edit-product/{productId}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getAdminEditProduct</span>)</div>
+    <div class="method-notes">edit product according to id</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">productId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAdminProducts"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /admin/products</code></pre></div>
+    <div class="method-summary">Your GET endpoint (<span class="nickname">getAdminProducts</span>)</div>
+    <div class="method-notes">view all products as a admin</div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    get all products
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getLogout"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /logout</code></pre></div>
+    <div class="method-summary">Your GET endpoint (<span class="nickname">getLogout</span>)</div>
+    <div class="method-notes">Logout and destroy session</div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Logout successfully
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getShop"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /shop</code></pre></div>
+    <div class="method-summary">Your GET endpoint (<span class="nickname">getShop</span>)</div>
+    <div class="method-notes">Main page</div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    redirect(&#x27;/&#x27;
+)
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    Not Found/wrong end point
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getShopItemId"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /shop/products</code></pre></div>
+    <div class="method-summary">Your GET endpoint (<span class="nickname">getShopItemId</span>)</div>
+    <div class="method-notes">Get all products</div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    take product from database and display it
+path:&#x27;/products&#x27;
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    Not Found / wrong endpoint
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getShopItemIdModified?"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /shop/products/{productId}</code></pre></div>
+    <div class="method-summary">Your GET endpoint (<span class="nickname">getShopItemIdModified?</span>)</div>
+    <div class="method-notes">get one product and display the detail</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">productId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; take product follow the id </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">productId (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Showing product detail and can add to cart
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    Not Found/wrong end point
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getShopSignup"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /signup</code></pre></div>
+    <div class="method-summary">Your GET endpoint (<span class="nickname">getShopSignup</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getShopUserIdAddItem"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /shop/cart</code></pre></div>
+    <div class="method-summary">Your GET endpoint (<span class="nickname">getShopUserIdAddItem</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#object">object</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    can show items that you have in cart
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    Not Found/wrong end point
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postAdminAddProduct"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /admin/add-product</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postAdminAddProduct</span>)</div>
+    <div class="method-notes">add product</div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    add successfully
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postAdminDeleteProduct"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /admin/delete-product</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postAdminDeleteProduct</span>)</div>
+    <div class="method-notes">delete product accoring to the product id and update it the database as an admin</div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postAdminEditProduct"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /admin/edit-product/{productId}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postAdminEditProduct</span>)</div>
+    <div class="method-notes">edit product as an admin</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">productId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postShopCart"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /shop/cart</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postShopCart</span>)</div>
+    <div class="method-notes">Add product</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#object">object</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; It will generate the new product id and add it the database </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postShopCartDeleteItem"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /shop/cart-delete-item</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postShopCartDeleteItem</span>)</div>
+    <div class="method-notes">Track already exists item and delete it in cart</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#object">object</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; track the exist item and delete it following the id </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    delete item successfully
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    faile to delete
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postShopCreateOrder"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /shop/create-order</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postShopCreateOrder</span>)</div>
+    <div class="method-notes">Here will create the order it push it to cart</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#object">object</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    create order successfully and add it to cart
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    Not Found/wrong end point
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postSignup"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /signup</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postSignup</span>)</div>
+    <div class="method-notes">check for register information</div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Register successfully
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    Not Found/ wrong information
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#User"><code>User</code> - User</a></li>
+    <li><a href="#User_cart"><code>User_cart</code></a></li>
+    <li><a href="#User_cart_items"><code>User_cart_items</code></a></li>
+    <li><a href="#order"><code>order</code> - order</a></li>
+    <li><a href="#order_products"><code>order_products</code></a></li>
+    <li><a href="#order_user"><code>order_user</code></a></li>
+    <li><a href="#product"><code>product</code> - product</a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="User"><code>User</code> - User</a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">email </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: email</div>
+          <div class="param-desc"><span class="param-type">example: test@test.com</span></div>
+<div class="param">password </div><div class="param-desc"><span class="param-type"><a href="#"></a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: test123</span></div>
+<div class="param">cart </div><div class="param-desc"><span class="param-type"><a href="#User_cart">User_cart</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="User_cart"><code>User_cart</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">items </div><div class="param-desc"><span class="param-type"><a href="#User_cart_items">User_cart_items</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="User_cart_items"><code>User_cart_items</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">productId </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: a234-s2124-fg145</span></div>
+<div class="param">quantity </div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 1</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="order"><code>order</code> - order</a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">products </div><div class="param-desc"><span class="param-type"><a href="#order_products">order_products</a></span>  </div>
+<div class="param">user </div><div class="param-desc"><span class="param-type"><a href="#order_user">order_user</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="order_products"><code>order_products</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">product </div><div class="param-desc"><span class="param-type"><a href="#object">Object</a></span> product </div>
+<div class="param">quantity </div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="order_user"><code>order_user</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">email </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">userId </div><div class="param-desc"><span class="param-type"><a href="#object">Object</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="product"><code>product</code> - product</a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">userId </div><div class="param-desc"><span class="param-type"><a href="#object">Object</a></span> User id </div>
+<div class="param">title </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Name of the product </div>
+<div class="param">price </div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span> Price of the product </div>
+<div class="param">description </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> To describe the product </div>
+<div class="param">imageUrl </div><div class="param-desc"><span class="param-type"><a href="#"></a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>

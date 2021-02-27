@@ -2,7 +2,7 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const compression = require('compression');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
@@ -14,6 +14,8 @@ const User = require('./models/user');
 
 const MONGODB_URI =
   'mongodb+srv://HuyBui:FdQJp4MtHYefN9E@cluster0.dgjac.mongodb.net/myFirstDatabase';
+
+
 
 const app = express();
 const store = new MongoDBStore({
